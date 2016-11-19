@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "find ./public ./routes ./bin -name '*_test.js' | xargs ./node_modules/mocha/bin/mocha -R spec"
+    "test": "sh ./miscs/init_tests.sh && find ./public ./routes ./bin -name '*_test.js' | xargs ./node_modules/mocha/bin/mocha -R spec"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
