@@ -1,5 +1,46 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  header.main-header
+    .container
+      .row
+        .col-sm-12
+          h1 plusplus7's page
+          h3 +7的个人主页
+          h3 Life is tough, take it easy : )
+  nav.main-navigation
+    .container
+      .row
+        .col-sm-12
+  .container
+    .row
+      .panel.panel-default
+        .panel-body
+          .col-sm-6.col-md-3
+            .thumbnail
+              a(href='./game')
+                img(src='http://121.40.79.149:8080/images/video_entrance.png', alt='video', width='300', height='475', style='height: 388px;')
+              .caption
+                h3 放映室
+                h5 娱乐向非专业游戏解说的视频空间
+          .col-sm-6.col-md-3
+            .thumbnail
+              a(href='./blog')
+                img(src='http://121.40.79.149:8080/images/blog_entrance.png', alt='blog', width='300', height='475', style='height: 388px;')
+              .caption
+                h3 图书馆
+                h5 博客，程序员的日常
+          .col-sm-6.col-md-3
+            .thumbnail
+              a(href='./storage')
+                img(src='http://121.40.79.149:8080/images/kyrin_entrance.png', alt='storage', width='300', height='388px', style='height: 388px;')
+              .caption
+                h3 储物间
+                h5 +7和朋友们存放东西的地方
+          .col-sm-6.col-md-3
+            .thumbnail
+              a(href='./aboutme')
+                img(src='http://121.40.79.149:8080/images/aboutme_entrance.png', alt='resume', width='300px', height='388px', style='height: 388px;')
+              .caption
+                h3 关于我
+                h5 个人简介
