@@ -4,7 +4,7 @@
 
 var mysql = require('mysql');
 
-function create_data_source(type, params) {
+var create_data_source = function (type, params) {
     if (type.toUpperCase() === "MYSQLDB") {
         return MySQLDBSource.create(params);
     }
@@ -122,6 +122,20 @@ var MySQLDBSource = {
         var sql = "DELETE FROM category WHERE category_id = ? LIMIT 1";
         this.conn.query(sql,
             [category_id],
+            result_callback
+        );
+    },
+    query_all_articles : function (result_callback) {
+        var sql = "SELECT * FROM article";
+        this.conn.query(sql,
+            [],
+            result_callback
+        );
+    },
+    query_all_categories : function (result_callback) {
+        var sql = "SELECT * FROM category";
+        this.conn.query(sql,
+            [],
             result_callback
         );
     }
