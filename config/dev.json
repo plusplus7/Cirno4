@@ -1,0 +1,18 @@
+{
+  "Customer" : {
+    "mediaUrls" : {
+      "ecs"   : "http://121.40.79.149:8080/images/",
+      "qiniu" : "http://7xlt42.com1.z0.glb.clouddn.com/"
+    },
+    "dbConfig" : {
+      "type" : "MySQLDB",
+      "params" : {
+        "host": "127.0.0.1",
+        "port": "3306",
+        "username": "root",
+        "password": "root",
+        "database": "cirno_test"
+      }
+    }
+  }
+}
