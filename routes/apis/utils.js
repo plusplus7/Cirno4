@@ -3,15 +3,16 @@
  */
 
 var response_codes = {
-    success         : "",
+    success         : "Success",
     no_such_entity  : "NoSuchEntity",
+    operation_fail  : "OperationFail",
     internal_error  : "InternalError"
 };
 
 var error_response = function(code, msg) {
     return {
         Success : false,
-        Message : response_codes[code] + "." + msg,
+        Message : code + "." + msg,
         Data    : ""
     }
 };

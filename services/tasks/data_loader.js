@@ -11,19 +11,34 @@ var set_cache_callback = function(err, success) {
     }
 };
 
-var load_data_callback = function(datatype, data_id, cache) {
+var load_article_callback = function(cache) {
     return function(err, result) {
         if (err == null) {
             for (var i in result) {
                 var data = result[i];
-                cache.set(data[data_id], data, set_cache_callback);
+                data.preview = data.preview.toString('utf8');
+                data.content = data.content.toString('utf8');
+                cache.set(data.article_id, data, set_cache_callback);
             }
         }
     };
 };
+
+var load_category_callback = function(cache) {
+    return function(err, result) {
+        if (err == null) {
+            for (var i in result) {
+                var data = result[i];
+                data.article_list = JSON.parse(data.article_list);
+                cache.set(data.category_id, data, set_cache_callback);
+            }
+        }
+    };
+};
+
 var load_data = function(db, cache) {
-    db.query_all_articles(load_data_callback("article", "article_id", cache));
-    db.query_all_categories(load_data_callback("category", "category_id", cache));
+    db.query_all_articles(load_article_callback(cache));
+    db.query_all_categories(load_category_callback(cache));
 };
 
 var interval_id;

@@ -7,17 +7,18 @@ var router = express.Router();
 
 var services = require('../../services/services');
 var api_utils = require('./utils');
+var codes = api_utils.codes;
 
 var db = services.db();
 var cache = services.cache();
 
 router.get('/GetArticle', function(req, res, next) {
-    var article_id = req.param("article_id");
+    var article_id  = req.query.article_id;
     cache.get(article_id, function(err, value) {
         var response;
         if (!err) {
             if (value == undefined) {
-                response = api_utils.error(codes.no_such_entity, "Article");
+                response = api_utils.error(codes.no_such_entity, "GetArticle");
             } else {
                 response = api_utils.success(value);
             }
@@ -29,16 +30,53 @@ router.get('/GetArticle', function(req, res, next) {
 });
 
 router.get('/CreateArticle', function(req, res, next) {
-    var article_id  = req.param("article_id");
-    var preview     = req.param("preview");
-    var content     = req.param("content");
+    var article_id  = req.body.article_id;
+    var preview     = req.body.preview;
+    var content     = req.body.content;
     db.create_article(article_id, preview, content, function (err, result) {
         var response;
         if (!err) {
             if (result.affectedRows != 1) {
-                response = api_utils.error(codes.operation_failed, "InsertArticle");
+                response = api_utils.error(codes.operation_fail, "CreateArticle");
             } else {
-                response = api_utils.success("{}");
+                response = api_utils.success();
+            }
+        } else {
+            response = api_utils.error(codes.internal_error, err);
+        }
+        res.send(response);
+    });
+});
+
+router.get('/UpdateArticle', function(req, res, next) {
+    var article_id  = req.body.article_id;
+    var preview     = req.body.preview;
+    var content     = req.body.content;
+    var view_count  = req.body.view_count;
+    db.update_article(article_id, preview, content, view_count, function (err, result) {
+        var response;
+        if (!err) {
+            if (result.affectedRows != 1) {
+                response = api_utils.error(codes.operation_fail, "UpdateArticle");
+            } else {
+                response = api_utils.success();
+            }
+        } else {
+            response = api_utils.error(codes.internal_error, err);
+        }
+        res.send(response);
+    });
+});
+
+router.get('/DeleteArticle', function(req, res, next) {
+    var article_id  = req.body.article_id;
+    db.delete_article(article_id, function (err, result) {
+        var response;
+        if (!err) {
+            if (result.affectedRows != 1) {
+                response = api_utils.error(codes.operation_fail, "DeleteArticle");
+            } else {
+                response = api_utils.success();
             }
         } else {
             response = api_utils.error(codes.internal_error, err);
