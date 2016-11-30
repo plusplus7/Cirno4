@@ -18,7 +18,7 @@ var load_article_callback = function(cache) {
                 var data = result[i];
                 data.preview = data.preview.toString('utf8');
                 data.content = data.content.toString('utf8');
-                cache.set(data.article_id, data, set_cache_callback);
+                cache.set("article/" + data.article_id, data, set_cache_callback);
             }
         }
     };
@@ -27,11 +27,24 @@ var load_article_callback = function(cache) {
 var load_category_callback = function(cache) {
     return function(err, result) {
         if (err == null) {
+            var top_list = [];
+            var side_list = [];
+            var area_list = [];
             for (var i in result) {
                 var data = result[i];
                 data.article_list = JSON.parse(data.article_list);
-                cache.set(data.category_id, data, set_cache_callback);
+                if (data.category_type == "top") {
+                    top_list.push(data);
+                } else if  (data.category_type == "side") {
+                    side_list.push(data);
+                } else {
+                    area_list.push(data);
+                }
+                cache.set("category/" + data.category_id, data, set_cache_callback);
             }
+            cache.set("top_list", top_list, set_cache_callback);
+            cache.set("side_list", side_list, set_cache_callback);
+            cache.set("area_list", area_list, set_cache_callback);
         }
     };
 };
