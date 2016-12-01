@@ -10,11 +10,11 @@ var api_utils = require('./utils');
 var codes = api_utils.codes;
 
 var db = services.db();
-var cache = services.cache();
+var get_cache = services.get_cache;
 
 router.get('/GetArticle', function(req, res, next) {
     var article_id  = req.query.article_id;
-    cache.get(article_id, function(err, value) {
+    get_cache(article_id, function(err, value) {
         var response;
         if (!err) {
             if (value == undefined) {
