@@ -16,11 +16,6 @@ app.controller("contentCtrl", function($scope, $location, $route, api, ev, model
     $scope.authorName   = "plusplus7";
     $scope.timeTag      = new Date().getFullYear() + "." + (new Date().getMonth()+1) + "." + new Date().getDate();
 
-    $scope.progress = {
-        show : false,
-        info : "",
-        value : 0
-    };
     $scope.generateTemplate = function () {
         $scope.previewContent = document.getElementById("previewTemplateId").innerHTML;
         $scope.postContent = document.getElementById("postTemplateId").innerHTML;
@@ -42,11 +37,6 @@ app.controller("contentCtrl", function($scope, $location, $route, api, ev, model
 
     };
     $scope.submitPostOnClick = function () {
-        $scope.progress = {
-            show: true,
-            info: "添加文章ing",
-            value: 10
-        };
         api.CreateArticle(
             $scope.articleId,
             $scope.previewContent,
@@ -54,36 +44,24 @@ app.controller("contentCtrl", function($scope, $location, $route, api, ev, model
         ).then(function (response) {
             console.log(response);
             if (!response.data.Success) {
-                $scope.progress.info = "添加文章失败!";
-                alert($scope.progress.info);
+                alert("添加文章失败!");
                 return ;
             }
-            $scope.progress = {
-                show: true,
-                info: "关联类目ing",
-                value: 40
-            };
             api.GetCategory($scope.articleCategory).then(function (res) {
                 console.log(res);
                 if (!res.data.Success) {
-                    $scope.progress.info = "查询类目失败!";
-                    alert($scope.progress.info);
+                    alert("查询类目失败!");
                     return ;
                 }
-                $scope.progress.value = 80;
                 res.data.Data.article_list.unshift($scope.articleId);
                 api.UpdateCategory($scope.articleCategory, null, null, null,
                     JSON.stringify(res.data.Data.article_list)).then(function (res2) {
                         console.log(res2);
                         if (!res2.data.Success) {
-                            $scope.progress.info = "更新类目失败!";
-                            alert($scope.progress.info);
+                            alert("更新类目失败!");
                             return ;
                         }
-                        $scope.progress.value = 100;
-                        $scope.progress.info = "操作成功";
-                        alert($scope.progress.info);
-                        $scope.progress.show = false;
+                        alert("操作成功");
                     });
             });
         });
