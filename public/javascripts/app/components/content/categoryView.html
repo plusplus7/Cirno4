@@ -1,0 +1,61 @@
+<div ng-controller="categoryCtrl">
+<main id="main" class="col-md-9 main-content" ng-show="categoryShow">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label class="control-label">分类ID</label>
+                    <textarea class="form-control" rows="1" name="areaid"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">分类名</label>
+                    <textarea class="form-control" rows="1" name="areaname"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">类型</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="type" value="common" checked>
+                            普通分类
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="type" value="top">
+                            分栏
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="type" value="side">
+                            专栏
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">分区</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="section" value="blog" checked>
+                            博客区
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="section" value="game">
+                            游戏区
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>身份验证码</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</div>

@@ -12,7 +12,17 @@ var codes = api_utils.codes;
 var db = services.db();
 var get_cache = services.get_cache;
 
-router.get('/GetArticle', function(req, res, next) {
+router.post('/ListCategories', function (req, res, next) {
+    var result = [];
+    result = result.concat(get_cache("top_list"), get_cache("side_list"), get_cache("area_list"));
+    res.send({
+        success : true,
+        data : result,
+        msg : ""
+    });
+});
+
+router.post('/GetArticle', function(req, res, next) {
     var article_id  = req.query.article_id;
     get_cache(article_id, function(err, value) {
         var response;
@@ -29,7 +39,7 @@ router.get('/GetArticle', function(req, res, next) {
     });
 });
 
-router.get('/CreateArticle', function(req, res, next) {
+router.post('/CreateArticle', function(req, res, next) {
     var article_id  = req.body.article_id;
     var preview     = req.body.preview;
     var content     = req.body.content;
@@ -48,7 +58,7 @@ router.get('/CreateArticle', function(req, res, next) {
     });
 });
 
-router.get('/UpdateArticle', function(req, res, next) {
+router.post('/UpdateArticle', function(req, res, next) {
     var article_id  = req.body.article_id;
     var preview     = req.body.preview;
     var content     = req.body.content;
@@ -68,7 +78,7 @@ router.get('/UpdateArticle', function(req, res, next) {
     });
 });
 
-router.get('/DeleteArticle', function(req, res, next) {
+router.post('/DeleteArticle', function(req, res, next) {
     var article_id  = req.body.article_id;
     db.delete_article(article_id, function (err, result) {
         var response;

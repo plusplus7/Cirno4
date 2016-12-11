@@ -1,0 +1,92 @@
+<div ng-controller="contentCtrl">
+    <main class="col-md-9 main-content" ng-show="contentShow">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label class="control-label">文章ID</label>
+                        <input class="form-control" ng-model="articleId" /></div>
+                    <div class="form-group">
+                        <label class="control-label">分区ID</label>
+                        <input class="form-control" ng-model="sectorId" /></div>
+                    <div class="form-group">
+                        <label class="control-label">文章标题</label>
+                        <input class="form-control" ng-model="articleTitle" /></div>
+                    <div class="form-group">
+                        <label class="control-label">作者链接</label>
+                        <input class="form-control" ng-model="authorLink" /></div>
+                    <div class="form-group">
+                        <label class="control-label">作者名</label>
+                        <input class="form-control" ng-model="authorName" /></div>
+                    <div class="form-group">
+                        <label class="control-label">时间戳</label>
+                        <input class="form-control" ng-model="timeTag" /></div>
+                    <div class="form-group">
+                        <button type="button" class="btn" ng-click="generateTemplate()">模板触发</button></div>
+                    <div id="previewTemplateId" ng-show="false">
+                        <article class="post tag-laravel-5-1 tag-artisan">
+                            <div class="post-head">
+                                <h1 class="post-title">
+                                    <a href="/{{ sectorId }}/post/{{ articleId }}">{{ articleTitle }}</a></h1>
+                                <div class="post-meta">
+        <span class="author">作者：
+          <a href="{{ authorLink }}">{{ authorName }}</a></span>•
+                                    <time class="post-date">{{ timeTag }}</time></div>
+                            </div>
+                            <div class="post-content">{{ previewContent }}</div>
+                            <div class="post-permalink">
+                                <a href="/{{ sectorId }}/post/{{ articleId }}" class="btn btn-default">阅读全文</a></div>
+                        </article>
+                    </div>
+                    <div id="postTemplateId" ng-show="false">
+                        <article class="post tag-laravel-5-1 tag-artisan">
+                            <div class="post-head">
+                                <h1 class="post-title">
+                                    <a href="/{{ sectorId }}/post/{{ articleId }}">{{ articleTitle }}</a></h1>
+                                <div class="post-meta">
+        <span class="author">作者：
+          <a href="{{ authorLink }}">{{ authorName }}</a></span>•
+                                    <time class="post-date">{{ timeTag }}</time></div>
+                            </div>
+                            <div class="post-content">{{ postContent }}</div>
+                        </article>
+                    </div>
+
+                    <div>
+                        <div class="form-group">
+                            <label class="control-label">文章概览</label>
+                            <textarea class="form-control" rows="2" ng-model="previewContent"></textarea></div></div>
+                    <div class="form-group">
+                        <button type="button" class="btn" ng-click="previewPreviewOnClick()">预览</button></div>
+                    <div class="form-group">
+                        <label class="control-label">文章分类</label>
+                        <select class="form-control" ng-model="articleCategory">
+                            <option ng-repeat="category in categories" value="{{ category.category_id }}">{{ category.display_name }}</option></select></div>
+                    <!--<div id="postContent">-->
+                    <!--<article id="52" class="post tag-laravel-5-1 tag-artisan">-->
+                    <!--<div class="post-head">-->
+                    <!--<h1 class="post-title">-->
+                    <!--<a href="/{{ articleSectorId }}/post/{{ articleId }}">{{ articleTitle }}</a></h1>-->
+                    <!--<div class="post-meta">-->
+                    <!--<span class="author">作者：-->
+                    <!--<a href="{{ arthorLink }}">{{ arthorName }}</a></span>•-->
+                    <!--<time class="post-date">{{ timeTag }}</time></div>-->
+                    <!--</div>-->
+                    <!--<div class="post-content">{{ postPostContent }}</div></article>-->
+                    <!--</div>-->
+                    <div>
+                        <div class="form-group">
+                            <label class="control-label">文章正文</label>
+                            <textarea class="form-control" rows="2" ng-model="postContent"></textarea></div></div>
+                    <div class="form-group">
+                        <button type="button" class="btn" ng-click="postPreviewOnClick()">预览</button></div>
+                    <div class="form-group">
+                        <label>身份验证码</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" ng-model="password"/></div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger" ng-click="submitPostOnClick()">提交</button></div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

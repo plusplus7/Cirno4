@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var blog = require('./routes/blog');
 var api = require('./routes/apis/api');
+var admin = require('./routes/admin');
 var tasks = require('./services/tasks/data_loader');
 
 tasks.launch();
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use(['/nimda'], admin);
 app.use(['/blog', '/game'], blog);
 app.use(['/'], blog);
 app.use('/api', api);

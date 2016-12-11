@@ -1,0 +1,14 @@
+<div ng-controller="sidebarCtrl">
+<aside class="col-md-3 sidebar" ng-show="sidebarShow">
+    <div class="widget" ng-repeat="widget in widgets">
+        <h4 class="title">{{ widget.name }}</h4>
+        <div class="content community">
+            <div class="list-group">
+                <p ng-repeat="page in widget.pages">
+                    <a class="list-group-item" ng-click="page.onclick()">{{ page.name }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</aside>
+</div>

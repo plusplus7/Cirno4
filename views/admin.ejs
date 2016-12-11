@@ -1,0 +1,36 @@
+<html>
+<head>
+    <%- include('includes/header_meta', {}) %>
+    <%- include('includes/header_css', {}) %>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.9/angular.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.9/angular-route.min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.9/angular-sanitize.min.js"></script>
+    <script src="/javascripts/app/app.js"></script>
+    <script src="/javascripts/app/services/api.js"></script>
+    <script src="/javascripts/app/components/structureDirective.js"></script>
+    <script src="/javascripts/app/components/navbar/navbarDirective.js"></script>
+    <script src="/javascripts/app/components/sidebar/sidebarDirective.js"></script>
+    <script src="/javascripts/app/components/content/contentDirective.js"></script>
+    <script src="/javascripts/app/components/content/categoryDirective.js"></script>
+    <script src="/javascripts/app/components/content/previewDirective.js"></script>
+</head>
+<body class="home-template" ng-app="adminApp">
+<header class="main-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>plusplus7's page</h1>
+                <h3>+7的个人主页</h3>
+                <h3>Life is tough, take it easy : )</h3>
+            </div>
+        </div>
+    </div>
+</header>
+<div ng-include="'/javascripts/app/components/structureView.html'">
+</div>
+<%- include('includes/footer_line', {}) %>
+<%- include('includes/footer_js', {}) %>
+</body>
+</html>

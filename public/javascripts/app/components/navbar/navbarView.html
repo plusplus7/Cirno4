@@ -1,0 +1,17 @@
+<nav class="main-navigation" ng-controller="navbarCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="menu">
+                    <li role="presentation" ng-repeat="button in buttons">
+                        <a ng-click="button.onclick()" ng-show="button.show">
+                            {{button.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
