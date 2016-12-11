@@ -16,7 +16,6 @@ app.controller("navbarCtrl", function($scope, $window, ev) {
             show    : false,
             onclick : function () {
                 ev.invoke(ev.QUIT_PREVIEW);
-                $window.history.back();
             }
         }
     ];

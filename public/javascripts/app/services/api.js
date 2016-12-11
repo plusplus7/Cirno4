@@ -25,6 +25,20 @@ app.factory('api', function($http, $httpParamSerializer) {
                 preview    : preview,
                 content    : content
             });
+        },
+        GetCategory : function (category_id) {
+            return this.invoke("/api/GetCategory", {
+                category_id: category_id
+            });
+        },
+        UpdateCategory : function (category_id, display_name, sector_id, category_type, article_list) {
+            return this.invoke("/api/UpdateCategory", {
+                category_id:    category_id,
+                display_name:   display_name,
+                sector_id:      sector_id,
+                category_type:  category_type,
+                article_list:   article_list
+            });
         }
     };
     return apiService;

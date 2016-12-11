@@ -74,7 +74,6 @@ var MySQLDBSource = {
     create_category : function(category_id, display_name, sector_id, category_type, article_list, result_callback) {
         var sql = "INSERT INTO category(category_id, display_name, sector_id, category_type, article_list)" +
             " VALUES(?, ?, ?, ?, ?)";
-        console.log(sql);
         this.conn.query(sql,
             [category_id, display_name, sector_id, category_type, article_list],
             result_callback

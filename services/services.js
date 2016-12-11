@@ -33,8 +33,12 @@ var get_cache_source = function() {
     return cache_source;
 };
 
-var get_cache = function(key) {
-    return cache_source.get(key);
+var get_cache = function(key, callback) {
+    if (!callback) {
+        return cache_source.get(key);
+    } else {
+        return cache_source.get(key, callback);
+    }
 };
 
 var get_prev_list_by_category_id = function(category_id) {
