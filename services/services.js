@@ -55,11 +55,12 @@ var get_prev_list_by_category_id = function(category_id) {
     return prev_list;
 };
 
-var get_article_by_article_id = function (article_id) {
-    var article = cache_source.get('article/' + article_id);
-    if (article) {
-        return article;
-    }
+var get_article_by_article_id = function (article_id, response_callback) {
+    return cache_source.get('article/' + article_id, response_callback);
+};
+
+var get_category_by_article_id = function (category_id, response_callback) {
+    return cache_source.get("category/" + category_id, response_callback);
 };
 
 var get_all_category_list = function () {
@@ -109,3 +110,4 @@ module.exports.get_side_list_by_sector_id   = get_side_list_by_sector_id;
 module.exports.get_area_list_by_sector_id   = get_area_list_by_sector_id;
 module.exports.get_prev_list_by_category_id = get_prev_list_by_category_id;
 module.exports.get_article_by_article_id    = get_article_by_article_id;
+module.exports.get_category_by_article_id   = get_category_by_article_id;

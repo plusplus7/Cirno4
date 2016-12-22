@@ -24,6 +24,12 @@ app.controller("sidebarCtrl", function($scope, $location, ev) {
         {
             name : "圣光の灵",
             pages : [
+                {
+                    name : "管理文章",
+                    onclick : function() {
+                        ev.invoke(ev.MANAGE_ARTICLE);
+                    }
+                }
             ]
         }
     ];

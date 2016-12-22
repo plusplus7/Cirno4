@@ -12,6 +12,8 @@ var codes = api_utils.codes;
 var db = services.db();
 var get_cache = services.get_cache;
 var get_all_category_list = services.get_all_category_list;
+var get_article_by_article_id = services.get_article_by_article_id;
+var get_category_by_article_id = services.get_category_by_article_id;
 
 router.post('/ListCategories', function (req, res, next) {
     res.send({
@@ -28,7 +30,7 @@ router.post('/GetCategory', function(req, res, next) {
         res.send(response);
         return;
     }
-    get_cache("category/" + category_id, function (err, value) {
+    get_category_by_article_id(category_id, function (err, value) {
         var response;
         if (!err) {
             if (value == undefined) {
@@ -40,7 +42,6 @@ router.post('/GetCategory', function(req, res, next) {
             response = api_utils.error(codes.internal_error, err);
         }
         res.send(response);
-        return;
     });
 });
 
@@ -94,7 +95,7 @@ router.post('/UpdateCategory', function(req, res, next) {
 
 router.post('/GetArticle', function(req, res, next) {
     var article_id  = req.query.article_id;
-    get_cache(article_id, function(err, value) {
+    get_article_by_article_id(article_id, function(err, value) {
         var response;
         if (!err) {
             if (value == undefined) {
