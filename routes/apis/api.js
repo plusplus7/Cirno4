@@ -11,13 +11,12 @@ var codes = api_utils.codes;
 
 var db = services.db();
 var get_cache = services.get_cache;
+var get_all_category_list = services.get_all_category_list;
 
 router.post('/ListCategories', function (req, res, next) {
-    var result = [];
-    result = result.concat(get_cache("top_list"), get_cache("side_list"), get_cache("area_list"));
     res.send({
         success : true,
-        data : result,
+        data : get_all_category_list(),
         msg : ""
     });
 });
