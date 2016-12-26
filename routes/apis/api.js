@@ -4,18 +4,27 @@
 
 var express = require('express');
 var router = express.Router();
+var config = require('config');
 
 var services = require('../../services/services');
 var api_utils = require('./utils');
 var codes = api_utils.codes;
 
 var db = services.db();
-var get_cache = services.get_cache;
-var get_all_category_list = services.get_all_category_list;
-var get_article_by_article_id = services.get_article_by_article_id;
-var get_category_by_article_id = services.get_category_by_article_id;
+var get_all_article_list        = services.get_all_article_list;
+var get_all_category_list       = services.get_all_category_list;
+var get_article_by_article_id   = services.get_article_by_article_id;
+var get_category_by_article_id  = services.get_category_by_article_id;
 
-router.post('/ListCategories', function (req, res, next) {
+var check_password = function(req, res, next) {
+    var password = req.body.password;
+    if (config.get("Api.Security.Password") != password) {
+        return res.sendStatus(403);
+    }
+    return next();
+};
+
+router.post('/ListCategories', function (req, res) {
     res.send({
         success : true,
         data : get_all_category_list(),
@@ -23,6 +32,13 @@ router.post('/ListCategories', function (req, res, next) {
     });
 });
 
+router.post('/ListArticles', function(req, res, next) {
+    res.send({
+        success : true,
+        data : get_all_article_list(),
+        msg : ""
+    });
+});
 router.post('/GetCategory', function(req, res, next) {
     var category_id = req.body.category_id;
     if (!category_id) {
@@ -45,7 +61,7 @@ router.post('/GetCategory', function(req, res, next) {
     });
 });
 
-router.post('/CreateCategory', function(req, res, next) {
+router.post('/CreateCategory', check_password, function(req, res, next) {
     var category_id     = req.body.category_id;
     var sector_id       = req.body.sector_id;
     var category_type   = req.body.category_type;
@@ -65,7 +81,7 @@ router.post('/CreateCategory', function(req, res, next) {
     });
 });
 
-router.post('/UpdateCategory', function(req, res, next) {
+router.post('/UpdateCategory', check_password, function(req, res, next) {
     var category_id     = req.body.category_id;
     var sector_id       = req.body.sector_id;
     var category_type   = req.body.category_type;
@@ -110,7 +126,7 @@ router.post('/GetArticle', function(req, res, next) {
     });
 });
 
-router.post('/CreateArticle', function(req, res, next) {
+router.post('/CreateArticle', check_password, function(req, res, next) {
     var article_id  = req.body.article_id;
     var preview     = req.body.preview;
     var content     = req.body.content;
@@ -129,7 +145,7 @@ router.post('/CreateArticle', function(req, res, next) {
     });
 });
 
-router.post('/UpdateArticle', function(req, res, next) {
+router.post('/UpdateArticle', check_password, function(req, res, next) {
     var article_id  = req.body.article_id;
     var preview     = req.body.preview;
     var content     = req.body.content;
@@ -149,7 +165,7 @@ router.post('/UpdateArticle', function(req, res, next) {
     });
 });
 
-router.post('/DeleteArticle', function(req, res, next) {
+router.post('/DeleteArticle', check_password, function(req, res, next) {
     var article_id  = req.body.article_id;
     db.delete_article(article_id, function (err, result) {
         var response;

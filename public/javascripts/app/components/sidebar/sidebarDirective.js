@@ -29,6 +29,12 @@ app.controller("sidebarCtrl", function($scope, $location, ev) {
                     onclick : function() {
                         ev.invoke(ev.MANAGE_ARTICLE);
                     }
+                },
+                {
+                    name : "身份管理",
+                    onclick : function() {
+                        ev.invoke(ev.SECURITY);
+                    }
                 }
             ]
         }

@@ -41,6 +41,17 @@ var get_cache = function(key, callback) {
     }
 };
 
+var get_all_article_list = function() {
+    var keys = cache_source.keys();
+    var result = [];
+    for (var i=0; i<keys.length; i++) {
+        if (keys[i].startsWith('article/')) {
+            result.push(keys[i].substr('article/'.length));
+        }
+    }
+    return result;
+};
+
 var get_prev_list_by_category_id = function(category_id) {
     var prev_list = [];
     var category = cache_source.get('category/' + category_id);
@@ -104,6 +115,7 @@ var get_area_list_by_sector_id = function (sector_id) {
 
 module.exports.cache = get_cache_source;
 module.exports.get_cache = get_cache;
+module.exports.get_all_article_list         = get_all_article_list;
 module.exports.get_all_category_list        = get_all_category_list;
 module.exports.get_top_list_by_sector_id    = get_top_list_by_sector_id;
 module.exports.get_side_list_by_sector_id   = get_side_list_by_sector_id;

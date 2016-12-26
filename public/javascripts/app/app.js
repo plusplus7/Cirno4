@@ -13,7 +13,8 @@ app.factory("ev", function($location, $rootScope) {
         SHOW_PREVIEW : 1<<1,
         QUIT_PREVIEW : 1<<2,
         ADD_CATEGORY : 1<<3,
-        MANAGE_ARTICLE : 1<<4,
+        MANAGE_ARTICLE  : 1<<4,
+        SECURITY        : 1<<5,
         invoke : function (e) {
             event = e;
             for (var i in changeListeners) {
@@ -38,7 +39,17 @@ app.factory("model", function(api) {
                 if (response.status == 200 && response.data.success == true) {
                     datas.categories = response.data.data;
                     status = "OK";
-                    done();
+                    api.ListArticles().then(function success(response) {
+                        if (response.status == 200 && response.data.success == true) {
+                            datas.articles = response.data.data;
+                            console.log(datas.articles);
+                            status = "OK";
+                            done();
+                        } else {
+                            console.error(response);
+                            alert("Failed to load articles");
+                        }
+                    });
                 } else {
                     console.error(response);
                     alert("Failed to load categories");

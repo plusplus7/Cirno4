@@ -14,5 +14,10 @@
         "database": "cirno"
       }
     }
+  },
+  "Api" : {
+    "Security" : {
+      "Password" : "test"
+    }
   }
 }

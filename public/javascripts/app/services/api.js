@@ -4,7 +4,9 @@
 
 app.factory('api', function($http, $httpParamSerializer) {
     var apiService = {
+        password: "",
         invoke  : function(url, params) {
+            params.password = this.password;
             var promise = $http({
                 url: url,
                 method: "POST",
@@ -13,11 +15,14 @@ app.factory('api', function($http, $httpParamSerializer) {
             });
             return promise;
         },
-        sign    : function(params) {
-            return "";
+        SetPassword : function(pass) {
+            this.password = pass;
         },
         ListCategories : function () {
             return this.invoke("/api/ListCategories",{});
+        },
+        ListArticles : function () {
+            return this.invoke("/api/ListArticles",{});
         },
         CreateArticle : function (article_id, preview, content) {
             return this.invoke("/api/CreateArticle",{

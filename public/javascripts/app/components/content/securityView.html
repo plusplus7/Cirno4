@@ -1,0 +1,17 @@
+<div ng-controller="securityCtrl">
+    <main id="main" class="col-md-9 main-content" ng-show="categoryShow">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" class="form-control" placeholder="Password" ng-model="password">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger" ng-click="password_submit()">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

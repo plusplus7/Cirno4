@@ -1,4 +1,25 @@
 <div ng-controller="categoryManagerCtrl">
-    <main id="main" class="col-md-9 main-content" ng-show="categoryManagerShow">
-    </main>
+    <div  ng-show="categoryManagerShow">
+        <main class="col-md-3 main-content">
+            <div class="list-group">
+                <a ng-repeat="article in articles_list" class="list-group-item" style="overflow-wrap: break-word">
+                    {{ article.name }}
+                </a>
+            </div>
+        </main>
+        <main class="col-md-3 main-content">
+            <div class="list-group">
+                <a ng-repeat="category in categories" class="list-group-item" ng-click="category_onclick(category.category_id)">
+                    {{ category.display_name }}
+                </a>
+            </div>
+        </main>
+        <main class="col-md-3 main-content">
+            <div class="list-group">
+                <a ng-repeat="article_id in category_articles track by $index" class="list-group-item" style="overflow-wrap: break-word">
+                    {{ article_id }}
+                </a>
+            </div>
+        </main>
+    </div>
 </div>
