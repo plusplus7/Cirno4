@@ -14,7 +14,8 @@ app.factory("ev", function($location, $rootScope) {
         QUIT_PREVIEW : 1<<2,
         ADD_CATEGORY : 1<<3,
         MANAGE_ARTICLE  : 1<<4,
-        SECURITY        : 1<<5,
+        MANAGE_CATEGORY : 1<<5,
+        SECURITY        : 1<<6,
         invoke : function (e) {
             event = e;
             for (var i in changeListeners) {

@@ -50,6 +50,7 @@ var load_category_callback = function(cache) {
 };
 
 var load_data = function(db, cache) {
+    cache.flushAll();
     db.query_all_articles(load_article_callback(cache));
     db.query_all_categories(load_category_callback(cache));
 };

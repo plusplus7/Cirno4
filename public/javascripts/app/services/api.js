@@ -31,6 +31,12 @@ app.factory('api', function($http, $httpParamSerializer) {
                 content    : content
             });
         },
+        DeleteArticle : function(article_id) {
+            return this.invoke("/api/DeleteArticle", {
+                article_id: article_id
+            });
+
+        },
         GetCategory : function (category_id) {
             return this.invoke("/api/GetCategory", {
                 category_id: category_id

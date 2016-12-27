@@ -1,23 +1,12 @@
-<div ng-controller="categoryManagerCtrl">
-    <div  ng-show="categoryManagerShow">
-        <main class="col-md-3 main-content">
+<div ng-controller="articleManagerCtrl">
+    <div  ng-show="articleManagerShow">
+        <main class="col-md-9 main-content">
             <div class="list-group">
                 <a ng-repeat="article in articles_list" class="list-group-item" style="overflow-wrap: break-word">
-                    {{ article.name }}
-                </a>
-            </div>
-        </main>
-        <main class="col-md-3 main-content">
-            <div class="list-group">
-                <a ng-repeat="category in categories" class="list-group-item" ng-click="category_onclick(category.category_id)">
-                    {{ category.display_name }}
-                </a>
-            </div>
-        </main>
-        <main class="col-md-3 main-content">
-            <div class="list-group">
-                <a ng-repeat="article_id in category_articles track by $index" class="list-group-item" style="overflow-wrap: break-word">
-                    {{ article_id }}
+                    {{ article.id }}
+                    <button type="button" class="close" ng-click="article_delete_onclick(article.id)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
                 </a>
             </div>
         </main>

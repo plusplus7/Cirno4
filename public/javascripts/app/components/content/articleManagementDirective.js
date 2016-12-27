@@ -2,34 +2,36 @@
  * Created by plusplus7 on 2016/12/22.
  */
 
-app.controller("categoryManagerCtrl", function($scope, model, ev) {
-    $scope.categories;
+app.controller("articleManagerCtrl", function($scope, model, ev, api) {
     $scope.articles;
     $scope.articles_list = [];
-    $scope.category_articles = [];
     $scope.reload       = function() {
-        $scope.categories   = model.get("categories");
         $scope.articles     = model.get("articles");
         for (var i=0; i<$scope.articles.length; i++) {
             $scope.articles_list.push({
-                name : $scope.articles[i]
+                id : $scope.articles[i]
             });
         }
     };
-    $scope.category_onclick = function(category_id) {
-        for (var i=0; i<$scope.categories.length; i++) {
-            if ($scope.categories[i].category_id == category_id) {
-                $scope.category_articles = $scope.categories[i].article_list;
+    $scope.articleManagerShow = false;
+    $scope.article_delete_onclick = function(article_id) {
+        api.DeleteArticle(article_id).then(function(res) {
+            console.log(res);
+            if (!res.data.Success) {
+                alert("删除文章失败!");
+                return ;
+            } else {
+                alert("删除文章成功!");
+                window.location.reload();
             }
-        }
+        });
     };
-    $scope.categoryManagerShow = false;
     ev.registerListenerOnChange(function (event) {
         if (event & ev.MANAGE_ARTICLE) {
-            $scope.categoryManagerShow = true;
+            $scope.articleManagerShow = true;
             $scope.reload();
         } else {
-            $scope.categoryManagerShow = false;
+            $scope.articleManagerShow = false;
         }
     });
 });

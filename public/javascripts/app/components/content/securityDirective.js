@@ -7,6 +7,7 @@ app.controller("securityCtrl", function($scope, api, ev){
     $scope.password_submit = function() {
         api.SetPassword($scope.password);
         console.log(api.password);
+        alert("done");
     }
     ev.registerListenerOnChange(function (event) {
         if (event & ev.SECURITY) {

@@ -5,7 +5,7 @@
         <div class="content community">
             <div class="list-group">
                 <p ng-repeat="page in widget.pages">
-                    <a class="list-group-item" ng-click="page.onclick()">{{ page.name }}</a>
+                    <a ng-class="{'list-group-item' : true, 'active' : page.active}" ng-click="page.onclick()">{{ page.name }}</a>
                 </p>
             </div>
         </div>
