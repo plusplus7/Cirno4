@@ -19,7 +19,6 @@ app.controller("articleManagerCtrl", function($scope, model, ev, api) {
             console.log(res);
             if (!res.data.Success) {
                 alert("删除文章失败!");
-                return ;
             } else {
                 alert("删除文章成功!");
                 window.location.reload();

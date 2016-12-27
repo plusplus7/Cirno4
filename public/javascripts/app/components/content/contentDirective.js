@@ -45,14 +45,12 @@ app.controller("contentCtrl", function($scope, $location, $route, api, ev, model
             console.log(response);
             if (!response.data.Success) {
                 alert("添加文章失败!");
-                window.location.reload();
                 return ;
             }
             api.GetCategory($scope.articleCategory).then(function (res) {
                 console.log(res);
                 if (!res.data.Success) {
                     alert("查询类目失败!");
-                    window.location.reload();
                     return ;
                 }
                 res.data.Data.article_list.unshift($scope.articleId);
@@ -61,7 +59,6 @@ app.controller("contentCtrl", function($scope, $location, $route, api, ev, model
                         console.log(res2);
                         if (!res2.data.Success) {
                             alert("更新类目失败!");
-                            window.location.reload();
                             return ;
                         }
                         alert("操作成功");

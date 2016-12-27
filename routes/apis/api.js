@@ -19,7 +19,8 @@ var get_category_by_article_id  = services.get_category_by_article_id;
 var check_password = function(req, res, next) {
     var password = req.body.password;
     if (config.get("Api.Security.Password") != password) {
-        return res.sendStatus(403);
+        var response = api_utils.error(codes.forbidden, "InvalidPassword")
+        return res.send(response);
     }
     return next();
 };

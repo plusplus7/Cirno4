@@ -2,7 +2,7 @@
  * Created by plusplus7 on 2016/12/4.
  */
 
-var app = angular.module("adminApp", ['ngRoute', 'ngSanitize']);
+var app = angular.module("adminApp", ['ngRoute', 'ngSanitize', 'ngCookies']);
 
 app.factory("ev", function($location, $rootScope) {
     var changeListeners = [];

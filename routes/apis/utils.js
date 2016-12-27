@@ -5,6 +5,7 @@
 var response_codes = {
     success         : "Success",
     no_such_entity  : "NoSuchEntity",
+    forbidden       : "Forbidden",
     operation_fail  : "OperationFail",
     internal_error  : "InternalError"
 };
