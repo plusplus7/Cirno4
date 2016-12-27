@@ -2,12 +2,12 @@
     <div  ng-show="articleManagerShow">
         <main class="col-md-9 main-content">
             <div class="list-group">
-                <a ng-repeat="article in articles_list" class="list-group-item" style="overflow-wrap: break-word">
+                <div ng-repeat="article in articles_list" ng-class="{'list-group-item' : true, 'list-group-item-warning' : !article.active}" style="overflow-wrap: break-word">
                     {{ article.id }}
                     <button type="button" class="close" ng-click="article_delete_onclick(article.id)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
-                </a>
+                </div>
             </div>
         </main>
     </div>

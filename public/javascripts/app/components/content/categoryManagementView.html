@@ -10,7 +10,7 @@
         <main class="col-md-5 main-content">
             <div class="list-group">
                 <div ng-repeat="article_id in category.article_list track by $index" >
-                    <a class="list-group-item" style="overflow-wrap: break-word">
+                    <div ng-class="{'list-group-item' : true, 'list-group-item-danger' : articles.indexOf(article_id) <= -1}" style="overflow-wrap: break-word">
                         {{ article_id }}
                         <button type="button" class="close" ng-click="category_article_close_onclick(article_id)">
                             <span class="glyphicon glyphicon-remove"></span>
@@ -18,7 +18,7 @@
                         <button type="button" class="close" ng-click="category_article_top_onclick(article_id)">
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </button>
-                    </a>
+                    </div>
                 </div>
             </div>
         </main>

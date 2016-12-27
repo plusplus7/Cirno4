@@ -1,2 +1,2 @@
 # Cirno4
-Me personal blog system, a grand new implement Cirno
+Me personal blog system, a brand new implement Cirno

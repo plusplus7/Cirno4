@@ -19,17 +19,29 @@ app.factory('api', function($http, $httpParamSerializer) {
             this.password = pass;
         },
         ListCategories : function () {
-            return this.invoke("/api/ListCategories",{});
+            return this.invoke("/api/ListCategories", {});
         },
         ListArticles : function () {
-            return this.invoke("/api/ListArticles",{});
+            return this.invoke("/api/ListArticles", {});
         },
         CreateArticle : function (article_id, preview, content) {
-            return this.invoke("/api/CreateArticle",{
+            return this.invoke("/api/CreateArticle", {
                 article_id : article_id,
                 preview    : preview,
                 content    : content
             });
+        },
+        UpdateArticle : function (article_id, preview, content) {
+            return this.invoke("/api/UpdateArticle", {
+                article_id : article_id,
+                preview    : preview,
+                content    : content
+            });
+        },
+        GetArticle : function(article_id) {
+            return this.invoke("/api/GetArticle", {
+                article_id : article_id
+            })
         },
         DeleteArticle : function(article_id) {
             return this.invoke("/api/DeleteArticle", {
@@ -40,6 +52,14 @@ app.factory('api', function($http, $httpParamSerializer) {
         GetCategory : function (category_id) {
             return this.invoke("/api/GetCategory", {
                 category_id: category_id
+            });
+        },
+        CreateCategory : function (category_id, display_name, sector_id, category_type) {
+            return this.invoke("/api/CreateCategory", {
+                category_id:    category_id,
+                display_name:   display_name,
+                sector_id:      sector_id,
+                category_type:  category_type
             });
         },
         UpdateCategory : function (category_id, display_name, sector_id, category_type, article_list) {

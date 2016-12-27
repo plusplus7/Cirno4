@@ -111,7 +111,7 @@ router.post('/UpdateCategory', check_password, function(req, res, next) {
 });
 
 router.post('/GetArticle', function(req, res, next) {
-    var article_id  = req.query.article_id;
+    var article_id  = req.body.article_id;
     get_article_by_article_id(article_id, function(err, value) {
         var response;
         if (!err) {

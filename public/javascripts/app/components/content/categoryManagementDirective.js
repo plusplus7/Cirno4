@@ -3,11 +3,15 @@
  */
 
 app.controller("categoryManagerCtrl", function($scope, model, ev, api) {
-    $scope.categories;
+    $scope.categories = "";
+    $scope.articles = "";
+
     $scope.category_id = "";
     $scope.category = [];
+
     $scope.reload       = function() {
         $scope.categories   = model.get("categories");
+        $scope.articles     = model.get("articles");
     };
     $scope.category_onclick = function(category_id) {
         $scope.category_id = category_id;

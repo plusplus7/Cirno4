@@ -15,6 +15,19 @@ app.controller("contentCtrl", function($scope, $location, $route, api, ev, model
     $scope.authorLink   = "http://plusplus7.com";
     $scope.authorName   = "plusplus7";
     $scope.timeTag      = new Date().getFullYear() + "." + (new Date().getMonth()+1) + "." + new Date().getDate();
+    $scope.lightMode    = true;
+
+    $scope.loadArticle  = function () {
+        api.GetArticle($scope.articleId).then(function(response) {
+            console.log(response);
+            if (response.data.Success) {
+                $scope.postContent = response.data.Data.content;
+                $scope.previewContent = response.data.Data.preview;
+            } else {
+                alert(response.data.Message);
+            }
+        });
+    };
 
     $scope.generateTemplate = function () {
         $scope.previewContent = document.getElementById("previewTemplateId").innerHTML;
@@ -37,35 +50,50 @@ app.controller("contentCtrl", function($scope, $location, $route, api, ev, model
 
     };
     $scope.submitPostOnClick = function () {
-        api.CreateArticle(
-            $scope.articleId,
-            $scope.previewContent,
-            $scope.postContent
-        ).then(function (response) {
-            console.log(response);
-            if (!response.data.Success) {
-                alert("添加文章失败!");
-                return ;
-            }
-            api.GetCategory($scope.articleCategory).then(function (res) {
-                console.log(res);
-                if (!res.data.Success) {
-                    alert("查询类目失败!");
-                    return ;
+        if ($scope.lightMode) {
+            api.UpdateArticle(
+                $scope.articleId,
+                $scope.previewContent,
+                $scope.postContent
+            ).then(function (response) {
+                console.log(response);
+                if (!response.data.Success) {
+                    alert("修改文章失败!");
+                    return;
                 }
-                res.data.Data.article_list.unshift($scope.articleId);
-                api.UpdateCategory($scope.articleCategory, null, null, null,
-                    JSON.stringify(res.data.Data.article_list)).then(function (res2) {
+                alert("Success");
+            });
+        } else {
+            api.CreateArticle(
+                $scope.articleId,
+                $scope.previewContent,
+                $scope.postContent
+            ).then(function (response) {
+                console.log(response);
+                if (!response.data.Success) {
+                    alert("添加文章失败!");
+                    return;
+                }
+                api.GetCategory($scope.articleCategory).then(function (res) {
+                    console.log(res);
+                    if (!res.data.Success) {
+                        alert("查询类目失败!");
+                        return;
+                    }
+                    res.data.Data.article_list.unshift($scope.articleId);
+                    api.UpdateCategory($scope.articleCategory, null, null, null,
+                        JSON.stringify(res.data.Data.article_list)).then(function (res2) {
                         console.log(res2);
                         if (!res2.data.Success) {
                             alert("更新类目失败!");
-                            return ;
+                            return;
                         }
                         alert("操作成功");
                         window.location.reload();
                     });
+                });
             });
-        });
+        }
     };
 
     $scope.contentShow = true;
