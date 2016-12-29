@@ -21,18 +21,14 @@ app.controller("categoryManagerCtrl", function($scope, model, ev, api) {
             }
         }
     };
-    $scope.category_article_top_onclick = function(article_id) {
-        var index = $scope.category.article_list.indexOf(article_id);
-        if (index > -1) {
-            $scope.category.article_list.splice(index, 1);
-        }
-        $scope.category.article_list.splice(0, 0, article_id);
+
+    $scope.update_category = function(category) {
         api.UpdateCategory(
-            $scope.category.category_id,
-            $scope.category.display_name,
-            $scope.category.sector_id,
-            $scope.category.category_type,
-            JSON.stringify($scope.category.article_list)
+            category.category_id,
+            category.display_name,
+            category.sector_id,
+            category.category_type,
+            JSON.stringify(category.article_list)
         ).then(function(response) {
             console.log(response);
             if (response.data.Success) {
@@ -43,28 +39,28 @@ app.controller("categoryManagerCtrl", function($scope, model, ev, api) {
             }
         });
     };
+
+    $scope.category_article_top_onclick = function(article_id) {
+        var index = $scope.category.article_list.indexOf(article_id);
+        if (index > -1) {
+            $scope.category.article_list.splice(index, 1);
+        }
+        $scope.category.article_list.splice(0, 0, article_id);
+        $scope.update_category($scope.category);
+    };
     $scope.category_article_close_onclick = function(article_id) {
         var index = $scope.category.article_list.indexOf(article_id);
         if (index > -1) {
             $scope.category.article_list.splice(index, 1);
         }
-        api.UpdateCategory(
-            $scope.category.category_id,
-            $scope.category.display_name,
-            $scope.category.sector_id,
-            $scope.category.category_type,
-            JSON.stringify($scope.category.article_list)
-        ).then(function(response) {
-            console.log(response.data);
-            if (response.data.Success) {
-                alert("Success");
-            } else {
-                alert("Failed");
-                window.location.reload();
-            }
-        });
+        $scope.update_category($scope.category);
     };
     $scope.categoryManagerShow = false;
+
+    $scope.add_category_submit = function(article_id) {
+        $scope.category.article_list.push(article_id);
+        $scope.update_category($scope.category);
+    };
     ev.registerListenerOnChange(function (event) {
         if (event & ev.MANAGE_CATEGORY) {
             $scope.categoryManagerShow = true;

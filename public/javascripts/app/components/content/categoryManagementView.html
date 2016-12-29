@@ -20,6 +20,27 @@
                         </button>
                     </div>
                 </div>
+                <div class="btn btn-default btn-group-justified" data-toggle="modal" data-target="#addCategoryModal" style="overflow-wrap: break-word" ng-click="attach_article()">
+                    <div class="text-center"><span class="glyphicon glyphicon-plus"></span> </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="addCategoryModalLabel">添加文章到分类</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" ng-model="add_category_article_id"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="add_category_submit(add_category_article_id)" data-dismiss="modal">提交</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
