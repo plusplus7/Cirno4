@@ -31,8 +31,7 @@ var accessLogStream = fileStreamRotator.getStream({
     verbose: false
 });
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('short', {stream: accessLogStream}));
 
 app.use(bodyParser.json());
